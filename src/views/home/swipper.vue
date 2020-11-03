@@ -38,6 +38,8 @@ export default defineComponent({
 .my-swipe .van-swipe-item {
   img {
     height: 100px;   
+    width: 50%;
+    padding: 0 25%;
   }
 }
 </style>
