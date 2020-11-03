@@ -1,6 +1,8 @@
-import { CATEGORY_TYPES, IHomeState } from '@/typings/home'
+import { CATEGORY_TYPES, IHomeState, ISlider } from '@/typings/home'
 import { Module } from 'vuex'
 import { IGlobalState } from '../index'
+import * as Types from '../action-types'
+import { getSliders } from '@/api/home'
 
 
 // 首页里的数据
@@ -23,8 +25,17 @@ const home: Module<IHomeState, IGlobalState> = {
   namespaced: true,
   state,
   mutations: {
-    aa(state) {
-      
+    [Types.SET_CATEGORY](state, payload: CATEGORY_TYPES) {
+      state.currentCategory = payload
+    },
+    [Types.SET_SLIDER_LIST](state, payload: ISlider[]) {
+      state.sliders = payload
+    }
+  },
+  actions: {
+    async [Types.SET_SLIDER_LIST]({ commit }) {
+      let sliders = await getSliders<ISlider>()
+      commit(Types.SET_SLIDER_LIST, sliders)
     }
   }
 }
