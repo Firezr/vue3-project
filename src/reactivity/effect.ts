@@ -1,0 +1,5 @@
+const effect = ''
+
+export {
+  effect
+}

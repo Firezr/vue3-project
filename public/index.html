@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <!-- <script src="/dist/vue.js"></script> -->
+  <script src="/node_modules/@vue/reactivity/dist/reactivity.global.js"></script>
+
+  <script>
+    const { reactive, effect, ref, computed, toRefs } = VueReactivity
+
+    const state = reactive({
+      name: 'a',
+      age: 1,
+      address: 'b'
+    })
+
+    effect(() => {
+      console.log('ok');
+      app.innerHTML = state.name + state.age
+    })
+
+    // 当effect 函数中依赖的数据发生变化 effect会重新执行
+    setTimeout(() => {
+      state.name = 'aa'
+      state.address = 'bb'
+    }, 1000)
+
+
+  </script>
+</body>
+
 </html>
